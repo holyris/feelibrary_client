@@ -1,12 +1,14 @@
+import 'package:feelibrary_client/models/feeling_type.dart';
 import 'package:feelibrary_client/models/movie.dart';
 import 'package:feelibrary_client/services/movie.dart';
 import 'package:feelibrary_client/widgets/movie_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class SearchResults extends StatefulWidget {
-  SearchResults({Key key, this.search}) : super(key: key);
+  SearchResults({Key key, this.search, this.feelingTypes}) : super(key: key);
 
   final String search;
+  final List<FeelingType> feelingTypes;
 
   @override
   _SearchResultsState createState() => _SearchResultsState();
@@ -18,14 +20,20 @@ class _SearchResultsState extends State<SearchResults> {
   @override
   void initState() {
     super.initState();
-    movieSearchResults = searchByTitle(widget.search);
+    if (widget.search != null) {
+      movieSearchResults = searchByTitle(widget.search);
+    } else if (widget.feelingTypes.length > 0) {
+      movieSearchResults = searchByFeelingTypes(widget.feelingTypes);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.search),
+        title: widget.search != null
+            ? Text(widget.search)
+            : Text("Search results"),
       ),
       body: Center(
         child: Container(
