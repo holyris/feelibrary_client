@@ -4,7 +4,7 @@ class Movie {
   final int id;
   final String title;
   final String description;
-  final DateTime releaseDate;
+  final String releaseDate;
   final String image;
   // final List<FeelingsProportion> feelingsProportion;
 
