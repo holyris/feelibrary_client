@@ -47,7 +47,8 @@ class _SearchResultsState extends State<SearchResults> {
                       itemBuilder: (context, index) {
                         Movie movie = snapshot.data[index];
                         return MovieListTile(
-                            movie.title, movie.releaseDate, movie.image);
+                          movie: movie,
+                        );
                       });
                 } else {
                   return Text("No results.");
