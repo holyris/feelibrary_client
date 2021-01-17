@@ -6,14 +6,20 @@ class Movie {
   final String description;
   final String releaseDate;
   final String image;
-  // final List<FeelingsProportion> feelingsProportion;
+  final List<FeelingsProportion> feelingsProportions;
 
-  Movie(this.id, this.title, this.description, this.releaseDate, this.image);
+  Movie(this.id, this.title, this.description, this.releaseDate, this.image,
+      this.feelingsProportions);
 
   Movie.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         title = json['title'],
         description = json['description'],
         releaseDate = json['releaseDate'],
-        image = json['image'];
+        image = json['image'],
+        feelingsProportions = toFeelingsProportions(json['feelingsProportion']);
+
+  static List<FeelingsProportion> toFeelingsProportions(List<dynamic> json) {
+    return json.map((e) => FeelingsProportion.fromJson(e)).toList();
+  }
 }
